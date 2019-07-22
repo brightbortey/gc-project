@@ -1,0 +1,34 @@
+<html lang="en">
+
+</html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My fancy title!</title>
+   <link href="{{url_for('static', filename='css/style.css')}}"
+          rel="stylesheet">
+</head>
+
+<body>
+  Hello World!
+</body>
+<h1>Hello World!</h1>
+<h2>Sub-titles</h2>
+<p>
+  Some text <br />
+  A new line
+</p>
+<img src="{{url_for('static',filename='img/giphy.gif')}}" alt="Awesome">
+<a href="{{url_for('static',filename='https://www.google.com')}}" target="_blank">Go to Google</a>
+<body>
+  <div>
+    <h1>Hello World!</h1>
+    <h2>Foo bar</h2>
+    <p>
+      Some text <br />
+      A new line
+    </p>
+    <img src="{{url_for('static',filename='img/giphy.gif')}}" alt="Awesome">
+    <a href="{{url_for('static',filename='https://www.google.com')}}" target="_blank">Go to Google</a>
+  </div>
+</body>
