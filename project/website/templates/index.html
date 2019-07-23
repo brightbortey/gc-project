@@ -11,7 +11,6 @@
     <title>class attendance</title>
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
     <link href="{{url_for('static' , filename='bootstrap.css') }}"rel="stylesheet">
     <link href="{{url_for('static' , filename='style.css') }}"rel="stylesheet">
     
@@ -110,8 +109,14 @@
 
                         <!-- Contact Address -->
                         <div class="contact-address">
-                            
-                            <span>Number of student</span>
+                        <script src="http://code.jquery.com/jquery.min.js">
+$(document).ready(function () {
+    setInterval(function () {
+        $('#students').load({{students}});}, 3000);};
+
+</script>
+                        <span id="students">{{students}}</span>
+                        
                         </div>
                     </div>
                 </div>
@@ -119,6 +124,7 @@
             </div>
         </div>
     </footer>
+    
 
 </body>
 
