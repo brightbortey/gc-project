@@ -1,6 +1,5 @@
 
 from flask import Flask, render_template
-import attendance.py
 #_____________1. init app_______________
 app = Flask(__name__)
 
@@ -12,7 +11,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-   countdown(1) 
    return render_template('index.html')
 
 
