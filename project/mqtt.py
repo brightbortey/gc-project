@@ -30,7 +30,8 @@ try:
         while no_of_students >= 0:
             print(datetime.datetime.now())    
             no_of_students = attendance.countdown(no_of_students)
-            message = "Student Number:" + str(no_of_students) #"Number of Students:" {no_of_students}
+            #message = "Student Number:" + str(no_of_students)
+            message = str(no_of_students) #"Number of Students:" {no_of_students}
             client.publish("glblcd/sam", message)
             
     #can be.. message = input('Your message:')
