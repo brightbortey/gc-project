@@ -36,6 +36,41 @@ $(document).ready(function(){
 
 </script>
 
+<script>
+    $(document).ready(function(){
+        // month converter from index / 0-11 values
+function covertMonth(num){
+  let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  // look into index with num 0-11
+  let computedRes = months[num];
+  return computedRes;
+}
+
+// time func
+function Time(){
+   // important to get new instant of the Date referrance
+  var date = new Date();
+  this.time = date.toLocaleTimeString();
+  this.year = date.getUTCFullYear();
+  this.day = date.getUTCDate();
+  this.month = date.getUTCMonth();
+  this.currentTime = covertMonth(this.month) + ' ' + this.day + ' ' + this.year + ' - - '  + date.toLocaleTimeString();
+  return this.currentTime;
+}
+
+
+ function timeOutPut(){
+  document.getElementById('time').innerHTML = Time();;
+   // 1:21:39 AM Dec 17 2017
+}
+
+   // run every 5secs
+setInterval(timeOutPut, 5000);
+Time();}); // initial call
+
+
+</script>
+
 
 </head>
 
@@ -128,7 +163,7 @@ $(document).ready(function(){
 
                         <!-- Widget Title -->
                         <h4 class="widget-title"><span>Date And Time</span></h4>
-                        <h5><span>{{time}}</span></h5>
+                        <div id="time"></div>
                         <h4 class="widget-title"><span></span></h4>
 
                         <!-- Contact Address -->
