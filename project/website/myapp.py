@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import paho.mqtt.client as mqtt
 from flask_socketio import SocketIO, emit
-
+import datetime
 import concurrent.futures
 #_____________1. init app_______________
 app = Flask(__name__)
@@ -15,21 +15,28 @@ studentnumber = 0
 #def help():
 #    return render_template('help.html') 
 
+
+
 @app.route('/')
 def index():
     print("here")
+    now = datetime.datetime.now()
+    timeString = now.strftime("%Y-%m-%d %H:%M")
+    templateData = {
+        'time':timeString
+        }
     global studentnumber
     print(studentnumber)
-    return render_template('index.html',students = studentnumber )
+    return render_template('index.html',students = studentnumber,**templateData )
 
 @socketio.on('my event', namespace='/test')
 def test_message(message):
-    emit('my response', {'studentnumber': message[studentnumber]})
-
+    emit('response', {'studentnumber': message[studentnumber]})
+    
 @socketio.on('connect', namespace='/test')
 def test_connect():
     emit('my response', {'studentnumber': studentnumber})
-
+    
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
     print('Client disconnected')
@@ -43,7 +50,7 @@ def on_message(client,userdata,msg):
     global studentnumber
     print(msg.topic + " \n " + msg.payload.decode("utf-8") + "\n")
     studentnumber=msg.payload.decode("utf-8")
-    test_message(studentnumber)
+    socketio.emit('response', {'studentnumber': studentnumber}, namespace='/test')
 
 
 @app.route('/get_data', methods=['GET'])
@@ -65,6 +72,6 @@ if __name__== '__main__':
     client.connect("127.0.0.1",1883,60)
     executor = concurrent.futures.ThreadPoolExecutor(max_workers=3)
     executor.submit(mqttloop, client)
-    print("blaa")
+    print("Active!!!")
     socketio.run(app, debug=True, host='0.0.0.0',)
     
